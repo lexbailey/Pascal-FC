@@ -1,0 +1,6 @@
+*.tmp
+*.o
+objfile
+listing
+pfccomp
+pint
