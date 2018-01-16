@@ -19,10 +19,13 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 *)
 
 
+
 (* @(#)pint.p	5.3 12/3/92 *)
 
 
-program pint(objfile,pmdfile,input,output);
+//program pint(objfile,pmdfile,input,output);
+program pint(input,output);
+
 
 
 (* Pascal-FC interpreter *)
@@ -291,6 +294,7 @@ var
 
       lncnt,chrcnt:integer; 
       h1,h2,h3,h4:integer;
+      h1r:real;
 		foundcall: boolean;		(* used in select (code 64) *)
 
       s: array[1..stmax] of stackrec;
@@ -865,9 +869,15 @@ var
 
 (* real-time clock management module *)
 
+
 { Get the real time. MicroSecond can be Null and is ignored then. }
-function  GetUnixTime (var MicroSecond: Integer): UnixTimeType;
-  asmname '_p_GetUnixTime';
+//function  GetUnixTime (var MicroSecond: Integer): UnixTimeType;
+//  asmname '_p_GetUnixTime';
+
+function GetUnixTime (var MicroSecond: Integer): UnixTimeType;
+begin
+    MicroSecond := 1;
+end;
 
 
 	procedure initclock;
@@ -2745,17 +2755,18 @@ begin (* Runprog *)
 					begin
 					h3 := s[t].i;
 					h1 := s[t-1].i;
+					h1r := s[t-1].r;
 					t := t - 2;
 					if h3 = 8 then
 
 
-						write(h1:11:8)
+						write(h1r:11:8)
 
 
 					else
 
 
-						write(h1:8:16)
+						write(h1r:8:16)
 
 
 					end;  (* 107 *)
@@ -2776,7 +2787,8 @@ begin (* Runprog *)
 			114:
 					begin
 					t := t - 1;
-					s[t].i := btoi(s[t].bs < s[t+1].bs)
+					//s[t].i := btoi(s[t].bs < s[t+1].bs)
+					s[t].i := btoi((s[t].bs <= s[t+1].bs) and (s[t].bs <> s[t+1].bs))
 					end;  (* 114 *)
 
 			115:
@@ -2790,7 +2802,8 @@ begin (* Runprog *)
 			116:
 					begin
 					t := t - 1;
-					s[t].i := btoi(s[t].bs > s[t+1].bs)
+					//s[t].i := btoi(s[t].bs > s[t+1].bs)
+					s[t].i := btoi((s[t].bs >= s[t+1].bs) and (s[t].bs <> s[t+1].bs))
 					end;  (* 116 *)
 
 			117:

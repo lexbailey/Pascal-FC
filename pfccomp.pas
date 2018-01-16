@@ -19,7 +19,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 *)
 
 
-program pfccomp(progfile,listfile,objfile,input,output); 
+//program pfccomp(progfile,listfile,objfile,input,output); 
+program pfccomp(input,output); 
 
 
 (* Pascal-FC "universal" compiler system *)
