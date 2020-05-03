@@ -1,6 +1,6 @@
 #!/bin/sh
 
-p=$PWD
+p=/usr/bin
 if test -f objfile
     then rm objfile
 fi
