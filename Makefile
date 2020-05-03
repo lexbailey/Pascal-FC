@@ -12,4 +12,4 @@ install: pfccomp pint
 	install pfc /usr/bin/
 	install pfccomp /usr/bin/
 
-.PHONY: all
+.PHONY: all install
