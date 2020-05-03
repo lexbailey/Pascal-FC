@@ -7,4 +7,9 @@ pfccomp: pfccomp.pas
 pint: pint.pas
 	fpc -Miso -g $<
 
+install: pfccomp pint
+	install pint /usr/bin/
+	install pfc /usr/bin/
+	install pfccomp /usr/bin/
+
 .PHONY: all
