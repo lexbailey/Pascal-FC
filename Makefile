@@ -1,5 +1,5 @@
 
-all: pfccomp pint copy
+all: pfccomp pint
 
 pfccomp: pfccomp.pas
 	fpc -Miso -g $<
@@ -7,9 +7,9 @@ pfccomp: pfccomp.pas
 pint: pint.pas
 	fpc -Miso -g $<
 
-copy:
-	cp pint /usr/bin/
-	cp pfc /usr/bin/
-	cp pfccomp /usr/bin/
-	
+install: pfccomp pint
+	install pint /usr/bin/
+	install pfc /usr/bin/
+	install pfccomp /usr/bin/
+
 .PHONY: all
